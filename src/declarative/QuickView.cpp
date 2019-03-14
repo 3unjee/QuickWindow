@@ -56,7 +56,18 @@ static const DWORD QUICKVIEW_FLAGS = WS_OVERLAPPED  | WS_THICKFRAME | WS_MINIMIZ
 
 #ifdef QT_5
 static const int QUICKVIEW_INTERVAL = 400;
+
+static const int QUICKVIEW_DELAY = 5000;
 #endif
+#endif
+
+#ifdef QT_5
+//-------------------------------------------------------------------------------------------------
+// Global variables
+
+QWindow * view = NULL;
+
+int count = 0;
 #endif
 
 //-------------------------------------------------------------------------------------------------
@@ -196,16 +207,22 @@ static const int QUICKVIEW_INTERVAL = 400;
 #endif
 
     SetParent(_id, _handle);
+
+#ifdef QT_5
+    // FIXME Qt5 Windows: We need to create a QWindow to receive QScreen events.
+    if (count == 0)
+    {
+        QTimer::singleShot(QUICKVIEW_DELAY, this, SLOT(onCreate()));
+    }
+
+    count++;
+#endif
 #else
 #ifdef QT_4
     setWindowFlags(Qt::FramelessWindowHint);
 #else
     setFlags(Qt::Window | Qt::FramelessWindowHint);
 #endif
-#endif
-
-#ifdef QT_5
-    connect(this, SIGNAL(screenChanged(QScreen *)), this, SLOT(onGeometryChanged()));
 #endif
 }
 
@@ -214,6 +231,17 @@ static const int QUICKVIEW_INTERVAL = 400;
 /* virtual */ QuickView::~QuickView()
 {
     DestroyWindow(_handle);
+
+#ifdef QT_5
+    count--;
+
+    if (count == 0 && view)
+    {
+        delete view;
+
+        view = NULL;
+    }
+#endif
 }
 
 #endif
@@ -892,6 +920,18 @@ void QuickView::updateState(Qt::WindowState state)
 
 #ifdef QT_5
 
+void QuickView::onCreate()
+{
+    view = new QWindow;
+
+    view->setFlags(Qt::Tool | Qt::FramelessWindowHint);
+
+    view->resize(0, 0);
+
+    view->show();
+    view->hide();
+}
+
 void QuickView::onMove()
 {
     if (_maximized || _fullScreen) return;
@@ -907,13 +947,6 @@ void QuickView::onMove()
 void QuickView::onFocus()
 {
     SetFocus(_id);
-}
-
-//-------------------------------------------------------------------------------------------------
-
-void QuickView::onGeometryChanged()
-{
-    qDebug("SCREEN GEOMETRY CHANGED");
 }
 
 #endif // Q_WIN_BORDERLESS

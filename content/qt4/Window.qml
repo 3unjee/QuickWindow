@@ -16,14 +16,29 @@ import gui     1.0
 Window
 {
     //---------------------------------------------------------------------------------------------
+    // Properties
+    //---------------------------------------------------------------------------------------------
+
+    property int dp16: dp(16)
+    property int dp24: dp(24)
+    property int dp64: dp(64)
+    property int dp96: dp(96)
+
+    property int dp320: dp(320)
+    property int dp200: dp(200)
+
+    property int dp640: dp(640)
+    property int dp480: dp(480)
+
+    //---------------------------------------------------------------------------------------------
     // Settings
     //---------------------------------------------------------------------------------------------
 
-    width : 640
-    height: 480
+    width : dp640
+    height: dp480
 
-    minimumWidth : 320
-    minimumHeight: 200
+    minimumWidth : dp320
+    minimumHeight: dp200
 
     //---------------------------------------------------------------------------------------------
     // Events
@@ -43,6 +58,30 @@ Window
 
             close();
         }
+        else if (event.key == Qt.Key_F12)
+        {
+            event.accepted = true;
+
+            takeShot();
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------
+    // Functions
+    //---------------------------------------------------------------------------------------------
+
+    function dp(value)
+    {
+        return value * ratio;
+    }
+
+    function takeShot()
+    {
+        console.debug("Saving shot: QuickWindow.png");
+
+        saveShot("../QuickWindow.png");
+
+        compressShots(".");
     }
 
     //---------------------------------------------------------------------------------------------
@@ -70,7 +109,7 @@ Window
         color: "#dcdcdc"
 
         font.family   : "consolas"
-        font.pixelSize: 96
+        font.pixelSize: dp96
     }
 
     Text
@@ -78,14 +117,14 @@ Window
         anchors.right : parent.right
         anchors.bottom: parent.bottom
 
-        anchors.margins: 16
+        anchors.margins: dp16
 
         text: "Qt " + core.version
 
         color: "#dcdcdc"
 
         font.family   : "consolas"
-        font.pixelSize: 24
+        font.pixelSize: dp24
     }
 
     MouseArea
@@ -108,7 +147,7 @@ Window
 
         color: "transparent"
 
-        border.width: 16
+        border.width: dp16
         border.color: "#161616"
     }
 
@@ -117,7 +156,7 @@ Window
         anchors.left : parent.left
         anchors.right: parent.right
 
-        height: 64
+        height: dp64
     }
 
     ItemResizer

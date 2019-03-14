@@ -120,22 +120,20 @@ protected: // Events
 private: // Functions
     void updateState(Qt::WindowState state);
 
-#ifdef Q_WIN_BORDERLESS
 private: // Static functions
     static HICON getIcon(const QIcon & icon, int width, int height);
 
 private: // Windows events
     static LRESULT CALLBACK events(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-#endif
 
 private slots:
 #ifdef QT_5
+    void onCreate();
+
     void onMove();
 #endif
 
     void onFocus();
-
-    void onGeometryChanged();
 #endif
 
 public: // Properties

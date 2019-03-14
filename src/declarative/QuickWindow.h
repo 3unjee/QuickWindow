@@ -34,6 +34,8 @@ class QuickWindow : public QuickItem
     Q_PROPERTY(int width  READ width  WRITE setWidth  NOTIFY widthChanged)
     Q_PROPERTY(int height READ height WRITE setHeight NOTIFY heightChanged)
 
+    Q_PROPERTY(qreal ratio READ ratio NOTIFY ratioChanged)
+
     Q_PROPERTY(int minimumWidth READ minimumWidth WRITE setMinimumWidth
                NOTIFY minimumWidthChanged)
 
@@ -72,8 +74,13 @@ protected: // QuickItem reimplementation
     /* virtual */ void componentComplete();
 
 private: // Functions
+    void setRatio(qreal ratio);
+
     void setMouseX(int x);
     void setMouseY(int y);
+
+private slots:
+    void onGeometryChanged();
 
 signals:
     void xChanged();
@@ -81,6 +88,8 @@ signals:
 
     void widthChanged ();
     void heightChanged();
+
+    void ratioChanged();
 
     void minimumWidthChanged ();
     void minimumHeightChanged();
@@ -103,6 +112,8 @@ public: // Properties
 
     void setWidth (int width);
     void setHeight(int height);
+
+    qreal ratio() const;
 
     int  minimumWidth   () const;
     void setMinimumWidth(int width);
@@ -130,6 +141,8 @@ public: // Properties
 
 private: // Variables
     QuickView * _view;
+
+    qreal _ratio;
 
     int _mouseX;
     int _mouseY;

@@ -16,6 +16,8 @@
 #ifdef QT_4
 #include <QCoreApplication>
 #include <QMouseEvent>
+#else
+#include <QScreen>
 #endif
 #include <QTimer>
 #include <QTime>
@@ -38,8 +40,17 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
 {
     _view = new QuickView(this);
 
+    _ratio = 1.0;
+
     _mouseX = -1;
     _mouseY = -1;
+
+#ifdef QT_5
+    connect(_view, SIGNAL(screenChanged(QScreen *)), this, SLOT(onGeometryChanged()));
+
+    connect(_view->screen(), SIGNAL(availableGeometryChanged(QRect)),
+            this,            SLOT(onGeometryChanged()));
+#endif
 }
 
 /* virtual */ QuickWindow::~QuickWindow()
@@ -140,6 +151,17 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
 // Private functions
 //-------------------------------------------------------------------------------------------------
 
+void QuickWindow::setRatio(qreal ratio)
+{
+    if (_ratio == ratio) return;
+
+    _ratio = ratio;
+
+    emit ratioChanged();
+}
+
+//-------------------------------------------------------------------------------------------------
+
 void QuickWindow::setMouseX(int x)
 {
     if (_mouseX == x) return;
@@ -156,6 +178,17 @@ void QuickWindow::setMouseY(int y)
     _mouseY = y;
 
     emit mouseXChanged();
+}
+
+//-------------------------------------------------------------------------------------------------
+// Private slots
+//-------------------------------------------------------------------------------------------------
+
+void QuickWindow::onGeometryChanged()
+{
+#ifdef QT_5
+    setRatio(_view->screen()->logicalDotsPerInch() / 96);
+#endif
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -198,6 +231,14 @@ void QuickWindow::setHeight(int height)
 
     emit heightChanged();
 }
+
+//-------------------------------------------------------------------------------------------------
+
+qreal QuickWindow::ratio() const
+{
+    return _ratio;
+}
+
 //-------------------------------------------------------------------------------------------------
 
 int QuickWindow::minimumWidth() const

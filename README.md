@@ -1,3 +1,5 @@
+<img src="QuickWindow.png" alt="QuickWindow" width="128px">
+
 # QuickWindow
 
 QuickWindow is a QtQuick frameless window for the Windows platform.<br>
