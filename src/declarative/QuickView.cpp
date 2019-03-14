@@ -22,13 +22,12 @@
 #endif
 #else
 #include <QGuiApplication>
+#include <QScreen>
 #endif
 
 // Gui includes
 #ifdef QT_4
 #include <GraphicsScene.h>
-#else
-#include <QScreen>
 #endif
 #include <QuickWindow.h>
 
@@ -227,7 +226,6 @@ int count = 0;
 }
 
 #ifdef Q_WIN_BORDERLESS
-
 /* virtual */ QuickView::~QuickView()
 {
     DestroyWindow(_handle);
@@ -243,7 +241,6 @@ int count = 0;
     }
 #endif
 }
-
 #endif
 
 //-------------------------------------------------------------------------------------------------

@@ -40,7 +40,13 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
 {
     _view = new QuickView(this);
 
+#ifdef QT_4
     _ratio = 1.0;
+#else
+    QScreen * screen = q->screen();
+
+    _ratio = screen->logicalDotsPerInch() / 96;
+#endif
 
     _mouseX = -1;
     _mouseY = -1;
@@ -48,8 +54,7 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
 #ifdef QT_5
     connect(_view, SIGNAL(screenChanged(QScreen *)), this, SLOT(onGeometryChanged()));
 
-    connect(_view->screen(), SIGNAL(availableGeometryChanged(QRect)),
-            this,            SLOT(onGeometryChanged()));
+    connect(screen, SIGNAL(availableGeometryChanged(QRect)), this, SLOT(onGeometryChanged()));
 #endif
 }
 
