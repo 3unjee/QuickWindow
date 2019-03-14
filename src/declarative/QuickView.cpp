@@ -920,6 +920,7 @@ void QuickView::updateState(Qt::WindowState state)
 
 #ifdef QT_5
 
+// FIXME Qt5 Windows: We need to create a QWindow to receive QScreen events.
 void QuickView::onCreate()
 {
     view = new QWindow;
