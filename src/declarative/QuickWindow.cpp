@@ -43,7 +43,7 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
 #ifdef QT_4
     _ratio = 1.0;
 #else
-    QScreen * screen = q->screen();
+    QScreen * screen = _view->screen();
 
     _ratio = screen->logicalDotsPerInch() / 96;
 #endif
