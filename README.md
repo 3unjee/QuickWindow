@@ -1,6 +1,6 @@
 <img src="QuickWindow.png" alt="QuickWindow" width="128px">
 
-[![appveyor](http://ci.appveyor.com/api/projects/status/ct0kbo659jviskec?svg=true)](http://ci.appveyor.com/project/3unjee/motionbox)
+[![appveyor](http://ci.appveyor.com/api/projects/status/d553ojt2rtj39jhh?svg=true)](http://ci.appveyor.com/project/3unjee/quickwindow)
 
 # QuickWindow
 
