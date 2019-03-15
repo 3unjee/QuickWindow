@@ -1,5 +1,7 @@
 <img src="QuickWindow.png" alt="QuickWindow" width="128px">
 
+[![appveyor](http://ci.appveyor.com/api/projects/status/ct0kbo659jviskec?svg=true)](http://ci.appveyor.com/project/3unjee/motionbox)
+
 # QuickWindow
 
 QuickWindow is a QtQuick frameless window for the Windows platform.<br>

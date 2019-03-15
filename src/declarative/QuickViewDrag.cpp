@@ -12,10 +12,6 @@
 
 #include "QuickViewDrag.h"
 
-#ifdef Q_OS_WIN
-#include <dwmapi.h>
-#endif
-
 // Gui includes
 #include <QuickView.h>
 #include <QuickWindow.h>
