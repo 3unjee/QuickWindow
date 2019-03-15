@@ -37,3 +37,4 @@ INCLUDEPATH += src/global \
 OTHER_FILES += README.md \
                content/qt4/Window.qml \
                content/qt5/Window.qml \
+               .appveyor.yml \
