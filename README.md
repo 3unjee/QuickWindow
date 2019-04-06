@@ -1,4 +1,4 @@
-<img src="QuickWindow.png" alt="QuickWindow" width="256px">
+<img src="QuickWindow.png" alt="QuickWindow" width="320px">
 
 [![appveyor](http://ci.appveyor.com/api/projects/status/d553ojt2rtj39jhh?svg=true)](http://ci.appveyor.com/project/3unjee/quickwindow)
 
