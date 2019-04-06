@@ -14,9 +14,9 @@
 #define QUICKVIEWDRAG_H
 
 // Gui includes
-#include <QuickItem.h>
+#include <QuickMouseArea.h>
 
-class QuickViewDrag : public QuickItem
+class QuickViewDrag : public QuickMouseArea
 {
     Q_OBJECT
 

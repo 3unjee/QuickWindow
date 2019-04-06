@@ -26,7 +26,7 @@
 // Ctor / dtor
 //-------------------------------------------------------------------------------------------------
 
-QuickViewDrag::QuickViewDrag(QuickItem * parent) : QuickItem(parent)
+QuickViewDrag::QuickViewDrag(QuickItem * parent) : QuickMouseArea(parent)
 {
     _pressed = false;
 

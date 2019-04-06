@@ -31,6 +31,9 @@
 
 // Forward declarations
 class QuickWindow;
+#ifdef QT_5
+class QuickMouseArea;
+#endif
 
 #ifdef QT_4
 class QuickView : public QDeclarativeView
@@ -214,12 +217,17 @@ private: // Variables
 
 #ifdef QT_5
     QTimer _timer;
+
+    int _touchId;
+
+    QuickMouseArea * _touchItem;
+    QTimer           _touchTimer;
 #endif
 #endif
 
 private:
     friend class QuickItem;
-    friend class QuickPainter;
+    friend class QuickMouseArea;
 };
 
 #endif // QUICKVIEW_H

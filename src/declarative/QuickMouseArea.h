@@ -10,41 +10,25 @@
 */
 //=================================================================================================
 
-#ifndef QUICKRESIZER_H
-#define QUICKRESIZER_H
+#ifndef QUICKMOUSEAREA_H
+#define QUICKMOUSEAREA_H
 
 // Gui includes
-#include <QuickMouseArea.h>
+#include <QuickItem.h>
 
-class QuickResizer : public QuickMouseArea
+class QuickMouseArea : public QuickItem
 {
     Q_OBJECT
 
-public: // Enums
-    enum ResizeType
-    {
-        TopLeft,
-        TopRight,
-        BottomLeft,
-        BottomRight,
-        Left,
-        Right,
-        Top,
-        Bottom
-    };
-
 public:
-    QuickResizer(ResizeType type, QuickItem * parent = NULL);
+    explicit QuickMouseArea(QuickItem * parent = NULL);
 
+#ifdef QT_5
 protected: // Events
-#ifdef QT_4
-    /* virtual */ void mousePressEvent(QGraphicsSceneMouseEvent * event);
-#else
-    /* virtual */ void mousePressEvent(QMouseEvent * event);
-#endif
+    /* virtual */ void touchEvent(QTouchEvent * event);
 
-private: // Variables
-    ResizeType _type;
+    /* virtual */ void touchUngrabEvent();
+#endif
 };
 
-#endif // QUICKRESIZER_H
+#endif // QUICKMOUSEAREA_H

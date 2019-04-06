@@ -39,7 +39,7 @@
 // Ctor / dtor
 //-------------------------------------------------------------------------------------------------
 
-QuickResizer::QuickResizer(ResizeType type, QuickItem * parent) : QuickItem(parent)
+QuickResizer::QuickResizer(ResizeType type, QuickItem * parent) : QuickMouseArea(parent)
 {
     _type = type;
 

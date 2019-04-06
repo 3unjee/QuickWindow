@@ -5,6 +5,7 @@ HEADERS += src/declarative/QuickView.h \
            src/declarative/QuickViewResizer.h \
            src/declarative/QuickWindow.h \
            src/declarative/QuickItem.h \
+           src/declarative/QuickMouseArea.h \
            src/declarative/QuickResizer.h \
 
 SOURCES += src/declarative/QuickView.cpp \
@@ -12,4 +13,5 @@ SOURCES += src/declarative/QuickView.cpp \
            src/declarative/QuickViewResizer.cpp \
            src/declarative/QuickWindow.cpp \
            src/declarative/QuickItem.cpp \
+           src/declarative/QuickMouseArea.cpp \
            src/declarative/QuickResizer.cpp \

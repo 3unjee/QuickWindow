@@ -154,6 +154,11 @@ int count = 0;
     _timer.setSingleShot(true);
 
     QObject::connect(&_timer, SIGNAL(timeout()), this, SLOT(onMove()));
+
+    _touchId   = -1;
+    _touchItem = NULL;
+
+    _touchTimer.setSingleShot(true);
 #endif
 
     //---------------------------------------------------------------------------------------------
