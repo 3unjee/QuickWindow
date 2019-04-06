@@ -164,6 +164,8 @@ Window
     {
         anchors.fill: parent
 
+        size: dp8
+
         visible: (maximized == false && fullScreen == false)
     }
 }

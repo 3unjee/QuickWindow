@@ -19,6 +19,7 @@ Window
     // Properties
     //---------------------------------------------------------------------------------------------
 
+    property int dp8 : dp(8)
     property int dp16: dp(16)
     property int dp24: dp(24)
     property int dp64: dp(64)
@@ -162,6 +163,8 @@ Window
     ItemResizer
     {
         anchors.fill: parent
+
+        size: dp8
 
         visible: (maximized == false && fullScreen == false)
     }
