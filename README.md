@@ -6,6 +6,15 @@
 
 QuickWindow is a QtQuick frameless window for the Windows platform.<br>
 
+# Highlights
+
+- Side and corner resize.
+- Dragging and snapping.
+- Double click maximize.
+- Keyboard shortcuts.
+- OpenGL and Software support.
+- Touch support.
+
 ## Technology
 
 QuickWindow is built in C++ with the [Qt framework](http://github.com/qtproject).

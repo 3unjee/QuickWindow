@@ -20,6 +20,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#ifndef Q_OPENGL
+#include <QQuickWindow>
+#endif
 #endif
 
 // Application includes
