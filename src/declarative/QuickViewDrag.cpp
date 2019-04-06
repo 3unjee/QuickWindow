@@ -80,11 +80,9 @@ QuickViewDrag::QuickViewDrag(QuickItem * parent) : QuickMouseArea(parent)
 /* virtual */ void QuickViewDrag::mouseMoveEvent(QMouseEvent *)
 #endif
 {
-    if (_pressed == false) return;
+    if (_pressed == false || _view->isFullScreen()) return;
 
 #ifdef Q_OS_WIN
-    if (_view->isFullScreen()) return;
-
     _pressed = false;
 
     ReleaseCapture();
