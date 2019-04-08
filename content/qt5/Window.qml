@@ -31,6 +31,8 @@ Window
     property int dp640: dp(640)
     property int dp480: dp(480)
 
+    property bool touch: false
+
     //---------------------------------------------------------------------------------------------
     // Settings
     //---------------------------------------------------------------------------------------------
@@ -86,12 +88,48 @@ Window
     }
 
     //---------------------------------------------------------------------------------------------
+
+    function touchStart()
+    {
+        if (touch)
+        {
+            touch = false;
+
+            return;
+        }
+        else if (resizer.visible)
+        {
+            touch = true;
+
+            timer.restart();
+        }
+    }
+
+    function touchClear()
+    {
+        touch = false;
+    }
+
+    //---------------------------------------------------------------------------------------------
     // Childs
     //---------------------------------------------------------------------------------------------
 
+    Timer
+    {
+        id: timer
+
+        interval: 5000
+
+        onTriggered: touchClear()
+    }
+
     Rectangle
     {
+        id: background
+
         anchors.fill: parent
+
+        anchors.margins: dp8
 
         color: "#323232"
     }
@@ -100,7 +138,7 @@ Window
     {
         id: itemText
 
-        anchors.fill: parent
+        anchors.fill: background
 
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment  : Text.AlignVCenter
@@ -115,10 +153,10 @@ Window
 
     Text
     {
-        anchors.right : parent.right
-        anchors.bottom: parent.bottom
+        anchors.right : background.right
+        anchors.bottom: background.bottom
 
-        anchors.margins: dp16
+        anchors.margins: dp8
 
         text: "Qt " + core.version
 
@@ -130,7 +168,7 @@ Window
 
     MouseArea
     {
-        anchors.fill: parent
+        anchors.fill: background
 
         onClicked:
         {
@@ -144,12 +182,16 @@ Window
 
     Rectangle
     {
+        id: borders
+
         anchors.fill: parent
 
         color: "transparent"
 
         border.width: dp8
-        border.color: "#161616"
+
+        border.color: (touch) ? "#008cdc"
+                              : "#161616"
     }
 
     ItemDrag
@@ -158,14 +200,20 @@ Window
         anchors.right: parent.right
 
         height: dp64
+
+        onClicked: touchStart()
     }
 
     ItemResizer
     {
+        id: resizer
+
         anchors.fill: parent
 
-        size: dp8
+        size: (touch) ? dp24 : dp8
 
         visible: (maximized == false && fullScreen == false)
+
+        onVisibleChanged: touchClear()
     }
 }

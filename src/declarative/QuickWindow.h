@@ -107,7 +107,10 @@ signals:
 public: // Properties
     QuickView * view() const;
 
+    int  x() const;
     void setX(int x);
+
+    int  y() const;
     void setY(int y);
 
     void setWidth (int width);

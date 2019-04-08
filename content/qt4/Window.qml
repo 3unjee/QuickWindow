@@ -91,7 +91,11 @@ Window
 
     Rectangle
     {
+        id: background
+
         anchors.fill: parent
+
+        anchors.margins: dp8
 
         color: "#323232"
     }
@@ -100,7 +104,7 @@ Window
     {
         id: itemText
 
-        anchors.fill: parent
+        anchors.fill: background
 
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment  : Text.AlignVCenter
@@ -115,10 +119,10 @@ Window
 
     Text
     {
-        anchors.right : parent.right
-        anchors.bottom: parent.bottom
+        anchors.right : background.right
+        anchors.bottom: background.bottom
 
-        anchors.margins: dp16
+        anchors.margins: dp8
 
         text: "Qt " + core.version
 
@@ -130,7 +134,7 @@ Window
 
     MouseArea
     {
-        anchors.fill: parent
+        anchors.fill: background
 
         onClicked:
         {

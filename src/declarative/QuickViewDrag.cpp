@@ -54,7 +54,11 @@ QuickViewDrag::QuickViewDrag(QuickItem * parent) : QuickMouseArea(parent)
 /* virtual */ void QuickViewDrag::mouseReleaseEvent(QMouseEvent *)
 #endif
 {
+    if (_pressed == false) return;
+
     _pressed = false;
+
+    emit clicked();
 }
 
 //-------------------------------------------------------------------------------------------------

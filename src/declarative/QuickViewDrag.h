@@ -38,6 +38,9 @@ protected: // Events
     /* virtual */ void mouseMoveEvent       (QMouseEvent * event);
 #endif
 
+signals:
+    void clicked();
+
 private: // Variables
     bool _pressed;
 };

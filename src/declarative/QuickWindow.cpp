@@ -207,11 +207,23 @@ QuickView * QuickWindow::view() const
 
 //-------------------------------------------------------------------------------------------------
 
+int QuickWindow::x() const
+{
+    return _view->x();
+}
+
 void QuickWindow::setX(int x)
 {
     _view->move(x, _view->y());
 
     emit xChanged();
+}
+
+//-------------------------------------------------------------------------------------------------
+
+int QuickWindow::y() const
+{
+    return _view->y();
 }
 
 void QuickWindow::setY(int y)
