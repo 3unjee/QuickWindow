@@ -38,8 +38,10 @@ protected: // Events
     /* virtual */ void mouseMoveEvent       (QMouseEvent * event);
 #endif
 
+#ifdef QT_5
 signals:
     void pressed();
+#endif
 
 private: // Variables
     bool _pressed;
