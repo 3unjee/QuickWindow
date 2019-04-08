@@ -39,7 +39,7 @@ protected: // Events
 #endif
 
 signals:
-    void clicked();
+    void pressed();
 
 private: // Variables
     bool _pressed;

@@ -192,6 +192,11 @@ Window
 
         border.color: (touch) ? "#008cdc"
                               : "#161616"
+
+        Behavior on border.color
+        {
+            ColorAnimation { duration: 150 }
+        }
     }
 
     ItemDrag
@@ -201,7 +206,7 @@ Window
 
         height: dp64
 
-        onClicked: touchStart()
+        onPressed: touchStart()
     }
 
     ItemResizer
