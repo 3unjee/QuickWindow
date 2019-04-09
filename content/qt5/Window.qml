@@ -199,8 +199,8 @@ Window
         border.color: (touch) ? "#008cdc"
                               : "#161616"
 
-        Behavior on border.width { ColorAnimation { duration: 150 } }
-        Behavior on border.color { ColorAnimation { duration: 150 } }
+        Behavior on border.width { PropertyAnimation { duration: 150 } }
+        Behavior on border.color { ColorAnimation    { duration: 150 } }
     }
 
     ItemDrag
