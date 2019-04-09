@@ -49,6 +49,17 @@ Window
 
     Component.onCompleted: forceActiveFocus()
 
+    onResizingChanged:
+    {
+        if (isTouching == false) return;
+
+        if (isResizing)
+        {
+            touch = true;
+        }
+        else timer.restart();
+    }
+
     //---------------------------------------------------------------------------------------------
     // Keys
     //---------------------------------------------------------------------------------------------
@@ -91,22 +102,17 @@ Window
 
     function touchStart()
     {
-        if (touch)
-        {
-            touch = false;
+        if (isTouching == false || resizer.visible == false) return;
 
-            return;
-        }
-        else if (resizer.visible)
-        {
-            touch = true;
+        touch = true;
 
-            timer.restart();
-        }
+        timer.restart();
     }
 
     function touchClear()
     {
+        if (isResizing) return;
+
         touch = false;
     }
 
@@ -118,7 +124,7 @@ Window
     {
         id: timer
 
-        interval: 5000
+        interval: 3000
 
         onTriggered: touchClear()
     }
@@ -188,15 +194,13 @@ Window
 
         color: "transparent"
 
-        border.width: dp8
+        border.width: resizer.size
 
         border.color: (touch) ? "#008cdc"
                               : "#161616"
 
-        Behavior on border.color
-        {
-            ColorAnimation { duration: 150 }
-        }
+        Behavior on border.width { ColorAnimation { duration: 150 } }
+        Behavior on border.color { ColorAnimation { duration: 150 } }
     }
 
     ItemDrag
@@ -215,7 +219,7 @@ Window
 
         anchors.fill: parent
 
-        size: (touch) ? dp24 : dp8
+        size: (touch) ? dp16 : dp8
 
         visible: (maximized == false && fullScreen == false)
 

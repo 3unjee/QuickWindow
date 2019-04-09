@@ -47,9 +47,7 @@ QuickViewDrag::QuickViewDrag(QuickItem * parent) : QuickMouseArea(parent)
 {
     _pressed = true;
 
-#ifdef QT_5
     emit pressed();
-#endif
 }
 
 #ifdef QT_4

@@ -665,6 +665,17 @@ int count = 0;
     _window->setMouseY(position.y());
 }
 
+/* virtual */ void QuickView::mouseReleaseEvent(QMouseEvent * event)
+{
+#ifdef QT_4
+    QDeclarativeView::mouseReleaseEvent(event);
+#else
+    QQuickWindow::mouseReleaseEvent(event);
+#endif
+
+    _window->setResizing(false);
+}
+
 //-------------------------------------------------------------------------------------------------
 
 #ifdef Q_WIN_BORDERLESS

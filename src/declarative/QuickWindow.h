@@ -55,6 +55,9 @@ class QuickWindow : public QuickItem
     Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
     Q_PROPERTY(bool locked     READ isLocked     WRITE setLocked     NOTIFY lockedChanged)
 
+    Q_PROPERTY(bool isResizing READ isResizing NOTIFY resizingChanged)
+    Q_PROPERTY(bool isTouching READ isTouching NOTIFY touchingChanged)
+
 public:
     explicit QuickWindow(QuickItem * parent = NULL);
 
@@ -78,6 +81,9 @@ private: // Functions
 
     void setMouseX(int x);
     void setMouseY(int y);
+
+    void setResizing(bool resizing);
+    void setTouching(bool touching);
 
 private slots:
     void onGeometryChanged();
@@ -103,6 +109,9 @@ signals:
     void maximizedChanged ();
     void fullScreenChanged();
     void lockedChanged    ();
+
+    void resizingChanged();
+    void touchingChanged();
 
 public: // Properties
     QuickView * view() const;
@@ -142,6 +151,9 @@ public: // Properties
     bool isLocked() const;
     void setLocked(bool locked);
 
+    bool isResizing() const;
+    bool isTouching() const;
+
 private: // Variables
     QuickView * _view;
 
@@ -150,8 +162,13 @@ private: // Variables
     int _mouseX;
     int _mouseY;
 
+    bool _resizing;
+    bool _touching;
+
 private:
     friend class QuickView;
+    friend class QuickMouseArea;
+    friend class QuickResizer;
 };
 
 #endif // QUICKWINDOW_H

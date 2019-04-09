@@ -14,6 +14,7 @@
 
 // Gui includes
 #include <QuickView.h>
+#include <QuickWindow.h>
 
 //-------------------------------------------------------------------------------------------------
 // Defines
@@ -69,6 +70,8 @@ QuickResizer::QuickResizer(ResizeType type, QuickItem * parent) : QuickMouseArea
 /* virtual */ void QuickResizer::mousePressEvent(QMouseEvent *)
 #endif
 {
+    _window->setResizing(true);
+
 #ifdef Q_OS_WIN
     uint orientation;
 

@@ -15,6 +15,7 @@
 #ifdef QT_5
 // Gui includes
 #include <QuickView.h>
+#include <QuickWindow.h>
 #endif
 
 /*!
@@ -66,6 +67,8 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
         if (point.state() == Qt::TouchPointPressed)
         {
             _view->_touchId = point.id();
+
+            _window->setTouching(true);
 
             QPoint screenPos = point.screenPos().toPoint();
 
@@ -133,6 +136,8 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
                 }
 
                 _view->_touchId = -1;
+
+                _window->setTouching(false);
             }
 
             return;
@@ -145,6 +150,8 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
     if (_view == NULL) return;
 
     _view->_touchId = -1;
+
+    _window->setTouching(false);
 
     QuickItem::touchUngrabEvent();
 }

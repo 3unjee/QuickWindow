@@ -51,6 +51,8 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
     _mouseX = -1;
     _mouseY = -1;
 
+    _resizing = false;
+
 #ifdef QT_5
     connect(_view, SIGNAL(screenChanged(QScreen *)), this, SLOT(onGeometryChanged()));
 
@@ -183,6 +185,26 @@ void QuickWindow::setMouseY(int y)
     _mouseY = y;
 
     emit mouseXChanged();
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void QuickWindow::setResizing(bool resizing)
+{
+    if (_resizing == resizing) return;
+
+    _resizing = resizing;
+
+    emit resizingChanged();
+}
+
+void QuickWindow::setTouching(bool touching)
+{
+    if (_touching == touching) return;
+
+    _touching = touching;
+
+    emit touchingChanged();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -376,4 +398,16 @@ void QuickWindow::setLocked(bool locked)
     _view->setLocked(locked);
 
     emit lockedChanged();
+}
+
+//-------------------------------------------------------------------------------------------------
+
+bool QuickWindow::isResizing() const
+{
+    return _resizing;
+}
+
+bool QuickWindow::isTouching() const
+{
+    return _touching;
 }

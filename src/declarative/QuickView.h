@@ -111,7 +111,8 @@ public: // Interface
 protected: // Events
     /* virtual */ void resizeEvent(QResizeEvent * event);
 
-    /* virtual */ void mouseMoveEvent(QMouseEvent * event);
+    /* virtual */ void mouseMoveEvent   (QMouseEvent * event);
+    /* virtual */ void mouseReleaseEvent(QMouseEvent * event);
 
 #ifdef Q_WIN_BORDERLESS
 #ifdef QT_4
