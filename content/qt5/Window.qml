@@ -51,13 +51,14 @@ Window
 
     onResizingChanged:
     {
-        if (isTouching == false) return;
-
         if (isResizing)
         {
-            touch = true;
+            if (isTouching) touch = true;
         }
-        else timer.restart();
+        else if (touch)
+        {
+            timer.restart();
+        }
     }
 
     //---------------------------------------------------------------------------------------------
