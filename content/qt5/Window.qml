@@ -101,16 +101,23 @@ Window
 
     //---------------------------------------------------------------------------------------------
 
-    function touchStart()
+    function toggleTouch()
     {
-        if (isTouching == false || resizer.visible == false) return;
+        if (touch)
+        {
+            timer.stop();
 
-        touch = true;
+            touch = false;
+        }
+        else if (isTouching && resizer.visible)
+        {
+            touch = true;
 
-        timer.restart();
+            timer.restart();
+        }
     }
 
-    function touchClear()
+    function clearTouch()
     {
         if (isResizing) return;
 
@@ -127,7 +134,7 @@ Window
 
         interval: 3000
 
-        onTriggered: touchClear()
+        onTriggered: clearTouch()
     }
 
     Rectangle
@@ -211,7 +218,7 @@ Window
 
         height: dp64
 
-        onPressed: touchStart()
+        onPressed: toggleTouch()
     }
 
     ItemResizer
@@ -224,6 +231,6 @@ Window
 
         visible: (maximized == false && fullScreen == false)
 
-        onVisibleChanged: touchClear()
+        onVisibleChanged: clearTouch()
     }
 }
