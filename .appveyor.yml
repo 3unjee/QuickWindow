@@ -8,5 +8,5 @@ build_script:
   - cd bin
   - 7z a ../QuickWindow.zip *
 
-- artifacts:
+artifacts:
   - path: QuickWindow.zip
