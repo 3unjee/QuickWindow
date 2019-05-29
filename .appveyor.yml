@@ -6,6 +6,7 @@ build_script:
   - qmake QuickWindow.pro
   - mingw32-make
   - cd bin
+  - rm .gitignore
   - 7z a ../QuickWindow.zip *
 
 artifacts:
