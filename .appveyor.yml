@@ -5,3 +5,8 @@ install:
 build_script:
   - qmake QuickWindow.pro
   - mingw32-make
+  - cd bin
+  - 7z a ../QuickWindow.zip *
+
+- artifacts:
+  - path: QuickWindow.zip
