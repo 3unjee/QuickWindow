@@ -218,12 +218,14 @@ private: // Variables
 
 #ifdef QT_5
     QTimer _timer;
+#endif
+#endif
 
+#ifdef QT_5
     int _touchId;
 
     QuickMouseArea * _touchItem;
     QTimer           _touchTimer;
-#endif
 #endif
 
 private:

@@ -89,7 +89,7 @@ QuickViewDrag::QuickViewDrag(QuickItem * parent) : QuickMouseArea(parent)
 
     ReleaseCapture();
 
-    // FIXME Qt 5.12.2: Touch drag seems to be broken, unless we double tap.
+    // FIXME Qt 5.12.3: Touch drag seems to be broken, unless we double tap.
     PostMessage((HWND) _view->winId(), WM_SYSCOMMAND, 0xf012, 0);
 #endif
 }

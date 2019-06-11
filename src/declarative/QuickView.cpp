@@ -100,6 +100,11 @@ int count = 0;
 
     scene->addItem(window);
 #else
+    _touchId   = -1;
+    _touchItem = NULL;
+
+    _touchTimer.setSingleShot(true);
+
     QSurfaceFormat format;
 
 #ifdef Q_OPENGL
@@ -154,11 +159,6 @@ int count = 0;
     _timer.setSingleShot(true);
 
     QObject::connect(&_timer, SIGNAL(timeout()), this, SLOT(onMove()));
-
-    _touchId   = -1;
-    _touchItem = NULL;
-
-    _touchTimer.setSingleShot(true);
 #endif
 
     //---------------------------------------------------------------------------------------------
