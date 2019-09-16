@@ -1,5 +1,7 @@
 jobs:
 - job: windows_amd64
+  pool:
+    vmImage: 'windows-latest'
   steps:
   - bash: |
       cd ..
