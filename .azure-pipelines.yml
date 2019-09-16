@@ -1,0 +1,5 @@
+jobs:
+- job: windows
+  steps:
+  - bash: |
+      cd ..
