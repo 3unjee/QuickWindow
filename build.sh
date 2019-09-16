@@ -7,7 +7,9 @@ set -e
 
 QuickWindow="../.."
 
-external="$pwd/../3rdparty"
+external="$PWD/../3rdparty"
+
+echo $external
 
 #--------------------------------------------------------------------------------------------------
 
