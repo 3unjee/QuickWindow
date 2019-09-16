@@ -7,7 +7,7 @@ set -e
 
 QuickWindow="../.."
 
-external="/c/dev/workspace/3rdparty"
+external="$pwd/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
