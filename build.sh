@@ -50,6 +50,8 @@ else
     Qt="$external/Qt/$Qt5_version"
 fi
 
+qmake="$Qt/bin/qmake"
+
 #--------------------------------------------------------------------------------------------------
 # Clean
 #--------------------------------------------------------------------------------------------------
@@ -93,12 +95,12 @@ spec=win32-g++
 
 PATH="$Qt/bin:$MinGW:$PATH"
 
-qmake --version
+$qmake --version
 echo ""
 
 cd $build
 
-qmake -r -spec $spec "$config" $QuickWindow
+$qmake -r -spec $spec "$config" $QuickWindow
 
 mingw32-make $make_arguments
 
