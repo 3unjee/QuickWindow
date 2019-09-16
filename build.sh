@@ -9,6 +9,7 @@ QuickWindow="../.."
 
 external="$PWD/../3rdparty"
 
+echo $PWD
 echo $external
 
 #--------------------------------------------------------------------------------------------------
@@ -52,7 +53,7 @@ else
     Qt="$external/Qt/$Qt5_version"
 fi
 
-qmake="$Qt/bin/qmake"
+qmake="sudo $Qt/bin/qmake.exe"
 
 #--------------------------------------------------------------------------------------------------
 # Clean
