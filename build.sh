@@ -50,7 +50,7 @@ else
     Qt="$external/Qt/$Qt5_version"
 fi
 
-qmake="$Qt/bin/qmake"
+qmake="$Qt/bin/qmake.exe"
 
 #--------------------------------------------------------------------------------------------------
 # Clean
