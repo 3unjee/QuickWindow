@@ -6,4 +6,5 @@ jobs:
       wget http://omega.gg/get/Sky/3rdparty/win64 -O 3rdparty-win64.zip
       unzip 3rdparty-win64.zip
       cd QuickWindow
+      ls
       sh build.sh qt5 win64
