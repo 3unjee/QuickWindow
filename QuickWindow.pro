@@ -36,7 +36,8 @@ INCLUDEPATH += src/global \
                src/kernel \
                src/declarative \
 
-OTHER_FILES += README.md \
+OTHER_FILES += build.sh \
+               README.md \
                content/qt4/Window.qml \
                content/qt5/Window.qml \
                .azure-pipelines.yml \
