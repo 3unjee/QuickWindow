@@ -1,7 +1,7 @@
 jobs:
 - job: win32_qt4
   pool:
-    vmImage: 'windows-latest'
+    vmImage: "windows-latest"
   steps:
   - bash: |
       cd ..
@@ -14,7 +14,7 @@ jobs:
 
 - job: win32_qt5
   pool:
-    vmImage: 'windows-latest'
+    vmImage: "windows-latest"
   steps:
   - bash: |
       cd ..
@@ -27,7 +27,7 @@ jobs:
 
 - job: win64_qt5
   pool:
-    vmImage: 'windows-latest'
+    vmImage: "windows-latest"
   steps:
   - bash: |
       cd ..
