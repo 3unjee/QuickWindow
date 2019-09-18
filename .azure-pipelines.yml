@@ -1,5 +1,5 @@
 jobs:
-- job: win32-qt4
+- job: win32_qt4
   pool:
     vmImage: 'windows-latest'
   steps:
@@ -10,7 +10,7 @@ jobs:
       cd s
       sh build.sh qt4 win32
 
-- job: win32-qt5
+- job: win32_qt5
   pool:
     vmImage: 'windows-latest'
   steps:
@@ -21,7 +21,7 @@ jobs:
       cd s
       sh build.sh qt5 win32
 
-- job: win64-qt5
+- job: win64_qt5
   pool:
     vmImage: 'windows-latest'
   steps:
