@@ -1,5 +1,16 @@
 jobs:
-- job: windows_amd64
+- job: win32
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - bash: |
+      cd ..
+      curl -L -o 3rdparty-win32.zip http://omega.gg/get/Sky/3rdparty/win32
+      unzip 3rdparty-win32.zip
+      cd s
+      sh build.sh qt4 win32
+
+- job: win64
   pool:
     vmImage: 'windows-latest'
   steps:
