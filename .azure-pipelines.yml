@@ -7,7 +7,7 @@ jobs:
       cd ..
       git clone https://github.com/omega-gg/3rdparty
       cd 3rdparty
-      sh generate.sh win32
+      bash generate.sh win32
       cd ../s
       sh build.sh qt4 win32
   - publish: $(System.DefaultWorkingDirectory)/bin
@@ -21,7 +21,7 @@ jobs:
       cd ..
       git clone https://github.com/omega-gg/3rdparty
       cd 3rdparty
-      sh generate.sh win32
+      bash generate.sh win32
       cd ../s
       sh build.sh qt5 win32
   - publish: $(System.DefaultWorkingDirectory)/bin
@@ -35,7 +35,7 @@ jobs:
       cd ..
       git clone https://github.com/omega-gg/3rdparty
       cd 3rdparty
-      sh generate.sh win64
+      bash generate.sh win64
       cd ../s
       sh build.sh qt5 win64
   - publish: $(System.DefaultWorkingDirectory)/bin
