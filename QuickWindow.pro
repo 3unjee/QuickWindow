@@ -19,7 +19,7 @@ contains(QT_MAJOR_VERSION, 4) {
 } else {
     DEFINES += QT_5
 
-    greaterThan(QT_MINOR_VERSION, 9): DEFINES += QT_5_LATEST
+    greaterThan(QT_MINOR_VERSION, 9): DEFINES += QT_5_9_GREATER
 }
 
 win32: DEFINES += Q_WIN_BORDERLESS Q_OPENGL
