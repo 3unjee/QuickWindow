@@ -39,7 +39,7 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
 
 /* explicit */ QuickMouseArea::QuickMouseArea(QuickItem * parent) : QuickItem(parent)
 {
-#ifdef QT_5_10
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
     setAcceptTouchEvents(false);
 #endif
 }
