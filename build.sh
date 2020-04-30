@@ -5,8 +5,6 @@ set -e
 # Settings
 #--------------------------------------------------------------------------------------------------
 
-QuickWindow="../.."
-
 external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
@@ -93,7 +91,7 @@ echo ""
 
 cd build
 
-$qmake -r -spec $spec "$config" $QuickWindow
+$qmake -r -spec $spec "$config" ..
 
 mingw32-make $make_arguments
 
