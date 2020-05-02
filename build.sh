@@ -75,11 +75,11 @@ if [ $1 = "qt4" ]; then
 
     export QT_SELECT=qt4
 
-    config="CONFIG += release"
+    config="CONFIG+=release"
 else
     export QT_SELECT=qt5
 
-    config="CONFIG += release qtquickcompiler"
+    config="CONFIG+=release qtquickcompiler"
 fi
 
 spec=win32-g++
