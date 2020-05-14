@@ -24,9 +24,7 @@ make_arguments="-j 4"
 
 if [ $# != 2 ] \
    || \
-   [ $1 != "qt4" -a $1 != "qt5" -a $1 != "clean" ] \
-   || \
-   [ $2 != "win32" -a $2 != "win64" -a $2 != "macOS" -a $2 != "linux" ]; then
+   [ $1 != "qt4" -a $1 != "qt5" -a $1 != "clean" ] || [ $2 != "win32" -a $2 != "win64" ]; then
 
     echo "Usage: build <qt4 | qt5 | clean> <win32 | win64>"
 
