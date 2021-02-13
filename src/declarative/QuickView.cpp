@@ -989,7 +989,7 @@ void QuickView::setMaximized(bool maximized)
 
     if (maximized)
     {
-#if defined(Q_WIN_BORDERLESS)
+#ifdef Q_WIN_BORDERLESS
         ShowWindow(_handle, SW_MAXIMIZE);
 #elif defined(QT_4)
         QDeclarativeView::showMaximized();
@@ -997,7 +997,7 @@ void QuickView::setMaximized(bool maximized)
         QQuickWindow::showMaximized();
 #endif
     }
-#if defined(Q_WIN_BORDERLESS)
+#ifdef Q_WIN_BORDERLESS
     else ShowWindow(_handle, SW_RESTORE);
 #elif defined(QT_4)
     else QDeclarativeView::showNormal();
