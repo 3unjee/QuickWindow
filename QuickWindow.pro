@@ -32,7 +32,7 @@ include(src/declarative/declarative.pri)
 INCLUDEPATH += src/global \
                src/controllers \
                src/kernel \
-               src/declarative \
+               src/declarative
 
 OTHER_FILES += build.sh \
                README.md \
