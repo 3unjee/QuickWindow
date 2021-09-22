@@ -1,12 +1,12 @@
 //=================================================================================================
 /*
-    Copyright (C) 2019 Benjamin Arnaud. <http://bunjee.me> <bunjee@omega.gg>
+    Copyright (C) 2019-2021 Benjamin Arnaud. <http://bunjee.me> <bunjee@omega.gg>
 
-    - GNU General Public License Usage:
-    This file may be used under the terms of the GNU General Public License version 3 as published
-    by the Free Software Foundation and appearing in the LICENSE.md file included in the packaging
-    of this file. Please review the following information to ensure the GNU General Public License
-    requirements will be met: https://www.gnu.org/licenses/gpl.html.
+    - GNU Lesser General Public License Usage:
+    This file may be used under the terms of the GNU Lesser General Public License version 3 as
+    published by the Free Software Foundation and appearing in the LICENSE.md file included in the
+    packaging of this file. Please review the following information to ensure the GNU Lesser
+    General Public License requirements will be met: https://www.gnu.org/licenses/lgpl.html.
 */
 //=================================================================================================
 
@@ -145,6 +145,10 @@ int count = 0;
 
     _maximumWidth  = QWIDGETSIZE_MAX;
     _maximumHeight = QWIDGETSIZE_MAX;
+
+#ifdef QT_5
+    _screen = NULL;
+#endif
 
     _visible = false;
     _opacity = 1.0;
@@ -948,6 +952,16 @@ void QuickView::onCreate()
 
 void QuickView::onMove()
 {
+    // FIXME Qt5: We need to manually detect and send the 'screenChanged' signal.
+    QScreen * screen = QGuiApplication::screenAt(QPoint(_x, _y));
+
+    if (screen && _screen != screen)
+    {
+        _screen = screen;
+
+        emit screenChanged(screen);
+    }
+
     if (_maximized || _fullScreen) return;
 
     QSize size = _viewport->size();
@@ -1097,7 +1111,13 @@ WId QuickView::winId() const
 #ifdef QT_5
 QScreen * QuickView::screen() const
 {
-    return fromWinId((WId) _id)->screen();
+    QScreen * screen = QGuiApplication::screenAt(QPoint(_x, _y));
+
+    if (screen)
+    {
+        return screen;
+    }
+    else return QGuiApplication::primaryScreen();
 }
 #endif // QT_5
 
