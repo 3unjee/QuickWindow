@@ -80,7 +80,7 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
                                   Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
 
             QMouseEvent eventPress(QEvent::MouseButtonPress, localPos, screenPos,
-                                   Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+                                   Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
 
             QCoreApplication::sendEvent(_view, &eventMove);
             QCoreApplication::sendEvent(_view, &eventPress);
@@ -101,7 +101,7 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
                 QCursor::setPos(screenPos);
 
                 QMouseEvent eventMove(QEvent::MouseMove, localPos, screenPos,
-                                      Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
+                                      Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
 
                 QCoreApplication::sendEvent(_view, &eventMove);
             }
