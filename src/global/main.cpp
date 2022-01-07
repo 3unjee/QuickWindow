@@ -113,8 +113,10 @@ int main(int argc, char * argv[])
 
 #ifdef QT_4
     load(QUrl("../content/qt4/Window.qml"));
-#else
+#elif defined(QT_5)
     load(QUrl("../content/qt5/Window.qml"));
+#else
+    load(QUrl("../content/qt6/Window.qml"));
 #endif
 
     return application->exec();

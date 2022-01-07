@@ -49,5 +49,6 @@ OTHER_FILES += build.sh \
                LICENSE.md \
                content/qt4/Window.qml \
                content/qt5/Window.qml \
+               content/qt6/Window.qml \
                .azure-pipelines.yml \
                .appveyor.yml \
