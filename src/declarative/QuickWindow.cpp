@@ -53,7 +53,7 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
 
     _resizing = false;
 
-#ifdef QT_5
+#ifdef QT_NEW
     connect(_view, SIGNAL(screenChanged(QScreen *)), this, SLOT(onGeometryChanged()));
 
     connect(screen, SIGNAL(availableGeometryChanged(QRect)), this, SLOT(onGeometryChanged()));
@@ -213,7 +213,7 @@ void QuickWindow::setTouching(bool touching)
 
 void QuickWindow::onGeometryChanged()
 {
-#ifdef QT_5
+#ifdef QT_NEW
     setRatio(_view->screen()->logicalDotsPerInch() / 96);
 #endif
 }

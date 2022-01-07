@@ -25,13 +25,17 @@
 #endif
 
 // Windows includes
-#if defined(QT_4) && defined(Q_OS_WIN)
+#if defined(Q_OS_WIN)
+#ifdef QT_4
 #include <windows.h>
+#elif QT_6
+#include <qt_windows.h>
+#endif
 #endif
 
 // Forward declarations
 class QuickWindow;
-#ifdef QT_5
+#ifdef QT_NEW
 class QuickMouseArea;
 #endif
 
@@ -72,7 +76,7 @@ public: // Interface
 
     Q_INVOKABLE bool close();
 
-#ifdef QT_5
+#ifdef QT_NEW
     Q_INVOKABLE void setPosition(int x, int y);
     Q_INVOKABLE void setPosition(const QPoint & position);
 #endif
@@ -117,8 +121,10 @@ protected: // Events
 #ifdef Q_WIN_BORDERLESS
 #ifdef QT_4
     /* virtual */ bool winEvent(MSG * msg, long * result);
-#else
+#elif defined(QT_5)
     /* virtual */ bool nativeEvent(const QByteArray & event, void * msg, long * result);
+#else
+    /* virtual */ bool nativeEvent(const QByteArray & event, void * msg, qintptr * result);
 #endif
 
 private: // Functions
@@ -131,7 +137,7 @@ private: // Windows events
     static LRESULT CALLBACK events(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 private slots:
-#ifdef QT_5
+#ifdef QT_NEW
     void onCreate();
 
     void onMove();
@@ -155,7 +161,7 @@ public: // Properties
 #ifdef Q_WIN_BORDERLESS
     WId winId() const;
 
-#ifdef QT_5
+#ifdef QT_NEW
     QScreen * screen() const;
 #endif
 
@@ -193,7 +199,7 @@ private: // Variables
     HWND _id;
     HWND _handle;
 
-#ifdef QT_5
+#ifdef QT_NEW
     QWindow * _viewport;
 #endif
 
@@ -211,7 +217,7 @@ private: // Variables
 
     QRect _rect;
 
-#ifdef QT_5
+#ifdef QT_NEW
     QScreen * _screen;
 #endif
 
@@ -220,12 +226,12 @@ private: // Variables
 
     QMetaMethod _method;
 
-#ifdef QT_5
+#ifdef QT_NEW
     QTimer _timer;
 #endif
 #endif
 
-#ifdef QT_5
+#ifdef QT_NEW
     int _touchId;
 
     QuickMouseArea * _touchItem;

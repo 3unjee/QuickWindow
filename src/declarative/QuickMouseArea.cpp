@@ -12,7 +12,7 @@
 
 #include "QuickMouseArea.h"
 
-#ifdef QT_5
+#ifdef QT_NEW
 // Gui includes
 #include <QuickView.h>
 #include <QuickWindow.h>
@@ -24,7 +24,7 @@
     \brief QML mouse area.
 */
 
-#ifdef QT_5
+#ifdef QT_NEW
 
 //-------------------------------------------------------------------------------------------------
 // Static variables
@@ -39,12 +39,12 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
 
 /* explicit */ QuickMouseArea::QuickMouseArea(QuickItem * parent) : QuickItem(parent)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-    setAcceptTouchEvents(false);
+#if defined(QT_NEW) && QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    setAcceptTouchEvents(true);
 #endif
 }
 
-#ifdef QT_5
+#ifdef QT_NEW
 
 //-------------------------------------------------------------------------------------------------
 // Protected events
@@ -64,7 +64,11 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
 
         QTouchEvent::TouchPoint point = points.first();
 
+#ifdef QT_5
         if (point.state() == Qt::TouchPointPressed)
+#else
+        if (point.state() == QEventPoint::Pressed)
+#endif
         {
             _view->_touchId = point.id();
 
@@ -92,7 +96,11 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
         {
             if (point.id() != id) continue;
 
+#ifdef QT_5
             if (point.state() == Qt::TouchPointMoved)
+#else
+            if (point.state() == QEventPoint::Updated)
+#endif
             {
                 QPoint screenPos = point.screenPos().toPoint();
 
@@ -105,7 +113,11 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
 
                 QCoreApplication::sendEvent(_view, &eventMove);
             }
+#ifdef QT_5
             else if (point.state() == Qt::TouchPointReleased)
+#else
+            else if (point.state() == QEventPoint::Released)
+#endif
             {
                 QPoint screenPos = point.screenPos().toPoint();
 

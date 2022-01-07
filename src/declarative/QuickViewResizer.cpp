@@ -48,7 +48,12 @@ QuickViewResizer::QuickViewResizer(QuickItem * parent) : QuickItem(parent)
 /* virtual */ void QuickViewResizer::geometryChanged(const QRectF & newGeometry,
                                                      const QRectF & oldGeometry)
 {
+#ifdef QT_OLD
     QuickItem::geometryChanged(newGeometry, oldGeometry);
+#else
+    QuickItem::geometryChange(newGeometry, oldGeometry);
+#endif
+
 
     if (oldGeometry.size() == newGeometry.size()) return;
 

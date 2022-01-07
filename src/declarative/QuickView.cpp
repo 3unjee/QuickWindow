@@ -35,7 +35,7 @@
 #ifdef Q_WIN_BORDERLESS
 #ifdef QT_4
 #include <qt_windows.h>
-#else
+#elif defined(QT_5)
 #include <QtWinExtras>
 #endif
 #endif
@@ -47,20 +47,25 @@
 */
 
 //-------------------------------------------------------------------------------------------------
+// Defines
+
+#define QUICKVIEW_MAX ((1 << 24) - 1)
+
+//-------------------------------------------------------------------------------------------------
 // Static variables
 
 #ifdef Q_WIN_BORDERLESS
 static const DWORD QUICKVIEW_FLAGS = WS_OVERLAPPED  | WS_THICKFRAME | WS_MINIMIZEBOX |
                                      WS_MAXIMIZEBOX | WS_CLIPCHILDREN;
 
-#ifdef QT_5
+#ifdef QT_NEW
 static const int QUICKVIEW_INTERVAL = 400;
 
 static const int QUICKVIEW_DELAY = 5000;
 #endif
 #endif
 
-#ifdef QT_5
+#ifdef QT_NEW
 //-------------------------------------------------------------------------------------------------
 // Global variables
 
@@ -143,10 +148,10 @@ int count = 0;
     _minimumWidth  = 0;
     _minimumHeight = 0;
 
-    _maximumWidth  = QWIDGETSIZE_MAX;
-    _maximumHeight = QWIDGETSIZE_MAX;
+    _maximumWidth  = QUICKVIEW_MAX;
+    _maximumHeight = QUICKVIEW_MAX;
 
-#ifdef QT_5
+#ifdef QT_NEW
     _screen = NULL;
 #endif
 
@@ -157,7 +162,7 @@ int count = 0;
 
     _method = meta->method(meta->indexOfMethod("onFocus()"));
 
-#ifdef QT_5
+#ifdef QT_NEW
     _timer.setInterval(QUICKVIEW_INTERVAL);
 
     _timer.setSingleShot(true);
@@ -216,7 +221,7 @@ int count = 0;
 
     SetParent(_id, _handle);
 
-#ifdef QT_5
+#ifdef QT_NEW
     // FIXME Qt5 Windows: We need to create a QWindow to receive QScreen events.
     if (count == 0)
     {
@@ -239,7 +244,7 @@ int count = 0;
 {
     DestroyWindow(_handle);
 
-#ifdef QT_5
+#ifdef QT_NEW
     count--;
 
     if (count == 0 && view)
@@ -396,7 +401,7 @@ int count = 0;
 
 //-------------------------------------------------------------------------------------------------
 
-#ifdef QT_5
+#ifdef QT_NEW
 
 /*!
     Moves the view.
@@ -686,8 +691,10 @@ int count = 0;
 
 #ifdef QT_4
 /* virtual */ bool QuickView::winEvent(MSG * msg, long * result)
-#else
+#elif defined(QT_5)
 /* virtual */ bool QuickView::nativeEvent(const QByteArray & event, void * msg, long * result)
+#else
+/* virtual */ bool QuickView::nativeEvent(const QByteArray & event, void * msg, qintptr * result)
 #endif
 {
 #ifdef QT_4
@@ -754,8 +761,10 @@ void QuickView::updateState(Qt::WindowState state)
     }
 #ifdef QT_4
     else return pixmap.toWinHICON();
-#else
+#elif defined(QT_5)
     else return QtWin::toHICON(pixmap);
+#else
+    else return pixmap.toImage().toHICON();
 #endif
 }
 
@@ -902,7 +911,7 @@ void QuickView::updateState(Qt::WindowState state)
 
         return 0;
     }
-#ifdef QT_5
+#ifdef QT_NEW
     // FIXME Qt 5.12: We have to send mouse release manually when dragging and resizing.
     else if (message == WM_CAPTURECHANGED)
     {
@@ -935,7 +944,7 @@ void QuickView::updateState(Qt::WindowState state)
 // Private slots
 //-------------------------------------------------------------------------------------------------
 
-#ifdef QT_5
+#ifdef QT_NEW
 
 // FIXME Qt5 Windows: We need to create a QWindow to receive QScreen events.
 void QuickView::onCreate()
@@ -1108,7 +1117,7 @@ WId QuickView::winId() const
 
 //-------------------------------------------------------------------------------------------------
 
-#ifdef QT_5
+#ifdef QT_NEW
 QScreen * QuickView::screen() const
 {
     QScreen * screen = QGuiApplication::screenAt(QPoint(_x, _y));
@@ -1119,7 +1128,7 @@ QScreen * QuickView::screen() const
     }
     else return QGuiApplication::primaryScreen();
 }
-#endif // QT_5
+#endif // QT_NEW
 
 //-------------------------------------------------------------------------------------------------
 

@@ -23,7 +23,7 @@ class QuickMouseArea : public QuickItem
 public:
     explicit QuickMouseArea(QuickItem * parent = NULL);
 
-#ifdef QT_5
+#ifdef QT_NEW
 protected: // Events
     /* virtual */ void touchEvent(QTouchEvent * event);
 
