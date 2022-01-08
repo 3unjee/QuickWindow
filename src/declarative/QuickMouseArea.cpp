@@ -54,7 +54,11 @@ static const int MOUSEAREA_DELAY_TOUCH = 200;
 {
     if (_view == NULL) return;
 
+#ifdef QT_5
     const QList<QTouchEvent::TouchPoint> & points = event->touchPoints();
+#else
+    const QList<QTouchEvent::TouchPoint> & points = event->points();
+#endif
 
     int id = _view->_touchId;
 

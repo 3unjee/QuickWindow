@@ -28,11 +28,16 @@ class QuickWindow : public QuickItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged)
-    Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged)
+    //---------------------------------------------------------------------------------------------
+    // NOTE Qt6: Prefixing with view because x, y, width, height are FINAL in QQuickItem.
 
-    Q_PROPERTY(int width  READ width  WRITE setWidth  NOTIFY widthChanged)
-    Q_PROPERTY(int height READ height WRITE setHeight NOTIFY heightChanged)
+    Q_PROPERTY(int viewX READ x WRITE setX NOTIFY xChanged)
+    Q_PROPERTY(int viewY READ y WRITE setY NOTIFY yChanged)
+
+    Q_PROPERTY(int viewWidth  READ width  WRITE setWidth  NOTIFY widthChanged)
+    Q_PROPERTY(int viewHeight READ height WRITE setHeight NOTIFY heightChanged)
+
+    //---------------------------------------------------------------------------------------------
 
     Q_PROPERTY(qreal ratio READ ratio NOTIFY ratioChanged)
 

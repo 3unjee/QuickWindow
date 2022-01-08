@@ -37,8 +37,8 @@ Window
     // Settings
     //---------------------------------------------------------------------------------------------
 
-    width : dp640
-    height: dp480
+    viewWidth : dp640
+    viewHeight: dp480
 
     minimumWidth : dp320
     minimumHeight: dp200

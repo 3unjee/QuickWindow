@@ -52,6 +52,7 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
     _mouseY = -1;
 
     _resizing = false;
+    _touching = false;
 
 #ifdef QT_NEW
     connect(_view, SIGNAL(screenChanged(QScreen *)), this, SLOT(onGeometryChanged()));

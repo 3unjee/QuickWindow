@@ -45,8 +45,13 @@ QuickViewResizer::QuickViewResizer(QuickItem * parent) : QuickItem(parent)
 // Protected QuickItem reimplementation
 //-------------------------------------------------------------------------------------------------
 
+#ifdef QT_OLD
 /* virtual */ void QuickViewResizer::geometryChanged(const QRectF & newGeometry,
                                                      const QRectF & oldGeometry)
+#else
+/* virtual */ void QuickViewResizer::geometryChange(const QRectF & newGeometry,
+                                                    const QRectF & oldGeometry)
+#endif
 {
 #ifdef QT_OLD
     QuickItem::geometryChanged(newGeometry, oldGeometry);
