@@ -11,6 +11,7 @@ external="$PWD/../3rdparty"
 
 Qt4_version="4.8.7"
 Qt5_version="5.15.2"
+Qt6_version="6.2.1"
 
 MinGW_version="8.1.0"
 
@@ -24,9 +25,11 @@ make_arguments="-j 4"
 
 if [ $# != 2 ] \
    || \
-   [ $1 != "qt4" -a $1 != "qt5" -a $1 != "clean" ] || [ $2 != "win32" -a $2 != "win64" ]; then
+   [ $1 != "qt4" -a $1 != "qt5" -a $1 != "qt6" -a $1 != "clean" ] \
+   || \
+   [ $2 != "win32" -a $2 != "win64" ]; then
 
-    echo "Usage: build <qt4 | qt5 | clean> <win32 | win64>"
+    echo "Usage: build <qt4 | qt5 | qt6 | clean> <win32 | win64>"
 
     exit 1
 fi
@@ -39,11 +42,15 @@ external="$external/$2"
 
 MinGW="$external/MinGW/$MinGW_version/bin"
 
-if [ $1 = "qt4" ]; then
+if [ $qt = "qt4" ]; then
 
     Qt="$external/Qt/$Qt4_version"
-else
+
+elif [ $qt = "qt5" ]; then
+
     Qt="$external/Qt/$Qt5_version"
+else
+    Qt="$external/Qt/$Qt6_version"
 fi
 
 qmake="$Qt/bin/qmake.exe"
@@ -68,17 +75,15 @@ fi
 # Build QuickWindow
 #--------------------------------------------------------------------------------------------------
 
-echo "BUILDING MotionBox"
-echo "------------------"
+echo "BUILDING QuickWindow"
+echo "--------------------"
+
+export QT_SELECT="$1"
 
 if [ $1 = "qt4" ]; then
 
-    export QT_SELECT=qt4
-
     config="CONFIG+=release"
 else
-    export QT_SELECT=qt5
-
     config="CONFIG+=release qtquickcompiler"
 fi
 
@@ -95,4 +100,4 @@ $qmake -r -spec $spec "$config" ..
 
 mingw32-make $make_arguments
 
-echo "------------------"
+echo "--------------------"
