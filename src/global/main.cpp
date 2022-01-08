@@ -60,7 +60,7 @@ QGuiApplication * create(int & argc, char ** argv)
 #endif
 
 #ifdef QT_6
-    // NOTE: We want the window geometry to be integer based at all time.
+    // NOTE: We want the view geometry to be integer based at all time.
     QGuiApplication
         ::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::Round);
 #endif

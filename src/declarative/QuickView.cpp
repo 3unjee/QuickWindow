@@ -647,6 +647,36 @@ int count = 0;
 // Events
 //-------------------------------------------------------------------------------------------------
 
+#ifdef QT_6
+
+// NOTE: We want to process some events directly and avoid the default implementation.
+/* virtual */ bool QuickView::event(QEvent * event)
+{
+    QEvent::Type type = event->type();
+
+    if (type == QEvent::MouseButtonRelease)
+    {
+        QMouseEvent * mouse = static_cast<QMouseEvent *> (event);
+
+        mouseReleaseEvent(mouse);
+
+        return true;
+    }
+    else if (type == QEvent::MouseMove)
+    {
+        QMouseEvent * mouse = static_cast<QMouseEvent *> (event);
+
+        mouseMoveEvent(mouse);
+
+        return true;
+    }
+
+    return QQuickWindow::event(event);
+}
+
+#endif
+
+
 /* virtual */ void QuickView::resizeEvent(QResizeEvent * event)
 {
 #ifdef QT_4
@@ -660,6 +690,17 @@ int count = 0;
 
 //-------------------------------------------------------------------------------------------------
 
+/* virtual */ void QuickView::mouseReleaseEvent(QMouseEvent * event)
+{
+#ifdef QT_4
+    QDeclarativeView::mouseReleaseEvent(event);
+#else
+    QQuickWindow::mouseReleaseEvent(event);
+#endif
+
+    _window->setResizing(false);
+}
+
 /* virtual */ void QuickView::mouseMoveEvent(QMouseEvent * event)
 {
 #ifdef QT_4
@@ -672,17 +713,6 @@ int count = 0;
 
     _window->setMouseX(position.x());
     _window->setMouseY(position.y());
-}
-
-/* virtual */ void QuickView::mouseReleaseEvent(QMouseEvent * event)
-{
-#ifdef QT_4
-    QDeclarativeView::mouseReleaseEvent(event);
-#else
-    QQuickWindow::mouseReleaseEvent(event);
-#endif
-
-    _window->setResizing(false);
 }
 
 //-------------------------------------------------------------------------------------------------

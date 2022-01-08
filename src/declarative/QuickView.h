@@ -113,11 +113,14 @@ public: // Interface
 #endif
 
 protected: // Events
+#ifdef QT_6
+    /* virtual */ bool event(QEvent * event);
+#endif
+
     /* virtual */ void resizeEvent(QResizeEvent * event);
 
-    /* virtual */ void mouseMoveEvent   (QMouseEvent * event);
     /* virtual */ void mouseReleaseEvent(QMouseEvent * event);
-
+    /* virtual */ void mouseMoveEvent   (QMouseEvent * event);
 #ifdef Q_WIN_BORDERLESS
 #ifdef QT_4
     /* virtual */ bool winEvent(MSG * msg, long * result);

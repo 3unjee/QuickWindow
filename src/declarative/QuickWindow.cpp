@@ -55,6 +55,12 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
     _touching = false;
 
 #ifdef QT_NEW
+    connect(_view, SIGNAL(xChanged(int)), this, SIGNAL(viewXChanged()));
+    connect(_view, SIGNAL(yChanged(int)), this, SIGNAL(viewYChanged()));
+
+    connect(_view, SIGNAL(widthChanged (int)), this, SIGNAL(viewWidthChanged ()));
+    connect(_view, SIGNAL(heightChanged(int)), this, SIGNAL(viewHeightChanged()));
+
     connect(_view, SIGNAL(screenChanged(QScreen *)), this, SLOT(onGeometryChanged()));
 
     connect(screen, SIGNAL(availableGeometryChanged(QRect)), this, SLOT(onGeometryChanged()));
@@ -230,46 +236,54 @@ QuickView * QuickWindow::view() const
 
 //-------------------------------------------------------------------------------------------------
 
-int QuickWindow::x() const
+int QuickWindow::viewX() const
 {
     return _view->x();
 }
 
-void QuickWindow::setX(int x)
+void QuickWindow::setViewX(int x)
 {
     _view->move(x, _view->y());
 
-    emit xChanged();
+    emit viewXChanged();
 }
 
-//-------------------------------------------------------------------------------------------------
-
-int QuickWindow::y() const
+int QuickWindow::viewY() const
 {
     return _view->y();
 }
 
-void QuickWindow::setY(int y)
+void QuickWindow::setViewY(int y)
 {
     _view->move(_view->x(), y);
 
-    emit yChanged();
+    emit viewYChanged();
 }
 
 //-------------------------------------------------------------------------------------------------
 
-void QuickWindow::setWidth(int width)
+int QuickWindow::viewWidth() const
+{
+    return _view->width();
+}
+
+void QuickWindow::setViewWidth(int width)
 {
     _view->resize(width, _view->height());
 
-    emit widthChanged();
+    emit viewWidthChanged();
 }
 
-void QuickWindow::setHeight(int height)
+int QuickWindow::viewHeight() const
+{
+    return _view->height();
+}
+
+void QuickWindow::setViewHeight(int height)
 {
     _view->resize(_view->width(), height);
 
-    emit heightChanged();
+    emit viewHeightChanged();
 }
 
 //-------------------------------------------------------------------------------------------------

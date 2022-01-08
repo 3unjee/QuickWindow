@@ -31,11 +31,11 @@ class QuickWindow : public QuickItem
     //---------------------------------------------------------------------------------------------
     // NOTE Qt6: Prefixing with view because x, y, width, height are FINAL in QQuickItem.
 
-    Q_PROPERTY(int viewX READ x WRITE setX NOTIFY xChanged)
-    Q_PROPERTY(int viewY READ y WRITE setY NOTIFY yChanged)
+    Q_PROPERTY(int viewX READ viewX WRITE setX NOTIFY viewXChanged)
+    Q_PROPERTY(int viewY READ viewY WRITE setY NOTIFY viewYChanged)
 
-    Q_PROPERTY(int viewWidth  READ width  WRITE setWidth  NOTIFY widthChanged)
-    Q_PROPERTY(int viewHeight READ height WRITE setHeight NOTIFY heightChanged)
+    Q_PROPERTY(int viewWidth  READ viewWidth  WRITE setViewWidth  NOTIFY viewWidthChanged)
+    Q_PROPERTY(int viewHeight READ viewHeight WRITE setViewHeight NOTIFY viewHeightChanged)
 
     //---------------------------------------------------------------------------------------------
 
@@ -94,11 +94,11 @@ private slots:
     void onGeometryChanged();
 
 signals:
-    void xChanged();
-    void yChanged();
+    void viewXChanged();
+    void viewYChanged();
 
-    void widthChanged ();
-    void heightChanged();
+    void viewWidthChanged ();
+    void viewHeightChanged();
 
     void ratioChanged();
 
@@ -121,14 +121,17 @@ signals:
 public: // Properties
     QuickView * view() const;
 
-    int  x() const;
-    void setX(int x);
+    int  viewX() const;
+    void setViewX(int x);
 
-    int  y() const;
-    void setY(int y);
+    int  viewY() const;
+    void setViewY(int y);
 
-    void setWidth (int width);
-    void setHeight(int height);
+    int  viewWidth() const;
+    void setViewWidth (int width);
+
+    int  viewHeight() const;
+    void setViewHeight(int height);
 
     qreal ratio() const;
 
