@@ -42,11 +42,11 @@ external="$external/$2"
 
 MinGW="$external/MinGW/$MinGW_version/bin"
 
-if [ $qt = "qt4" ]; then
+if [ $1 = "qt4" ]; then
 
     Qt="$external/Qt/$Qt4_version"
 
-elif [ $qt = "qt5" ]; then
+elif [ $1 = "qt5" ]; then
 
     Qt="$external/Qt/$Qt5_version"
 else
