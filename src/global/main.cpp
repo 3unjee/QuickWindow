@@ -59,6 +59,12 @@ QGuiApplication * create(int & argc, char ** argv)
     QQuickWindow::setSceneGraphBackend(QSGRendererInterface::Software);
 #endif
 
+#ifdef QT_6
+    // NOTE: We want the window geometry to be integer based at all time.
+    QGuiApplication
+        ::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::Round);
+#endif
+
     QGuiApplication * application = new QGuiApplication(argc, argv);
 #endif
 
