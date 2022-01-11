@@ -55,14 +55,22 @@ QGuiApplication * create(int & argc, char ** argv)
 
     QApplication * application = new QApplication(argc, argv);
 #else
+#ifdef QT_5
 #ifndef Q_OPENGL
     QQuickWindow::setSceneGraphBackend(QSGRendererInterface::Software);
 #endif
+#else
+    // NOTE: We want to handle dpi scaling ourselves.
+    qputenv("QT_ENABLE_HIGHDPI_SCALING", "0");
 
-#ifdef QT_6
-    // NOTE: We want the view geometry to be integer based at all time.
-    QGuiApplication
-        ::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::Round);
+#ifndef Q_OPENGL
+    QQuickWindow::setGraphicsApi(QSGRendererInterface::Software);
+#endif
+
+    // NOTE: We want the view geometry to be integer based at all time. We don't need this when
+    //       setting QT_ENABLE_HIGHDPI_SCALING to 0.
+    //QGuiApplication
+    //    ::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::Round);
 #endif
 
     QGuiApplication * application = new QGuiApplication(argc, argv);
