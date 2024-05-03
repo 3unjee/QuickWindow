@@ -52,16 +52,17 @@ QGuiApplication * create(int & argc, char ** argv)
 {
 #ifdef QT_4
     QCoreApplication::setAttribute(Qt::AA_ImmediateWidgetCreation);
+#elif defined(QT_5)
+    // NOTE: We want to handle dpi scaling ourselves.
+    qputenv("QT_SCREEN_SCALE_FACTORS", "1");
 
-    QApplication * application = new QApplication(argc, argv);
-#else
-#ifdef QT_5
 #ifndef Q_OPENGL
     QQuickWindow::setSceneGraphBackend(QSGRendererInterface::Software);
 #endif
-#else
+#else // QT_6
     // NOTE: We want to handle dpi scaling ourselves.
     qputenv("QT_ENABLE_HIGHDPI_SCALING", "0");
+    qputenv("QT_SCREEN_SCALE_FACTORS",   "1");
 
 #ifndef Q_OPENGL
     QQuickWindow::setGraphicsApi(QSGRendererInterface::Software);
@@ -73,6 +74,9 @@ QGuiApplication * create(int & argc, char ** argv)
     //    ::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::Round);
 #endif
 
+#ifdef QT_4
+    QApplication * application = new QApplication(argc, argv);
+#else
     QGuiApplication * application = new QGuiApplication(argc, argv);
 #endif
 
