@@ -128,7 +128,7 @@ QuickWindow::QuickWindow(QuickItem * parent) : QuickItem(parent)
 
     QFileInfoList list = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::Files);
 
-    foreach (QFileInfo info, list)
+    foreach (const QFileInfo & info, list)
     {
         if (info.suffix().toLower() == "png")
         {
