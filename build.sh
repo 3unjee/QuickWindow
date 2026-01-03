@@ -11,7 +11,7 @@ external="$PWD/../3rdparty"
 
 Qt4_version="4.8.7"
 Qt5_version="5.15.2"
-Qt6_version="6.8.3"
+Qt6_version="6.10.1"
 
 MinGW_version="13.1.0"
 
