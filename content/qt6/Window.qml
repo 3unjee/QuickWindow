@@ -180,7 +180,7 @@ Window
         font.pixelSize: dp24
     }
 
-    MouseArea
+    SkyMouseArea
     {
         anchors.fill: background
 
