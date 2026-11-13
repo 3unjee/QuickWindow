@@ -137,5 +137,9 @@ int main(int argc, char * argv[])
     load(QUrl("../content/qt6/Window.qml"));
 #endif
 
-    return application->exec();
+    int result = application->exec();
+
+    delete application;
+
+    return result;
 }
